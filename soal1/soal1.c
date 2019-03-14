@@ -1,11 +1,11 @@
 #include <dirent.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 int main()
 {
@@ -55,11 +55,10 @@ int main()
         }
         while ((de = readdir(dr)) != NULL)
         {
-
             child_id = fork();
             if (child_id == 0)
             {
-                //child
+                // child
                 char *ext = strstr(de->d_name, ".png");
                 int stringlength = strlen(de->d_name);
                 int pointer = (ext - de->d_name);
@@ -70,7 +69,7 @@ int main()
                     char basename[pointer + 1];
                     memcpy(basename, &de->d_name[0], pointer);
                     basename[pointer] = '\0';
-                    //https://stackoverflow.com/questions/7430248/creating-a-new-directory-in-c
+                    // https://stackoverflow.com/questions/7430248/creating-a-new-directory-in-c
                     struct stat st = {0};
                     if (stat("gambar", &st) == -1)
                     {
@@ -87,7 +86,7 @@ int main()
             }
             else
             {
-                //parent
+                // parent
                 while (wait(&status) > 0)
                     ;
                 continue;
