@@ -62,7 +62,7 @@ int main()
                 char *ext = strstr(de->d_name, ".png");
                 int stringlength = strlen(de->d_name);
                 int pointer = (ext - de->d_name);
-                int trueext = (stringlength - pointer == 4);
+                int trueext = (strcmp(ext, ".png")==0);
                 if (trueext)
                 {
                     // printf("True Ext\n");
