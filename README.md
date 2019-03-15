@@ -144,6 +144,34 @@ execv("/bin/grep", argv);
 
 ## SOAL 4
 
+Ganti directory
+
+```c
+if ((chdir("/home/durianpeople/Documents/makanan")) < 0)
+    {
+        exit(EXIT_FAILURE);
+    }
+```
+
+Mengambil waktu terakhir kali diakses (dalam detik):
+
+```c
+struct stat filestat;
+stat("makan_enak.txt", &filestat);
+
+time_t current_time = time(NULL);
+time_t diff = difftime(current_time, filestat.st_atime);
+```
+
+Jika waktu kurang dari atau sama dengan 30 detik, maka membuat file **makan_sehat[counter].txt**, dengan counter dimulai dari 1:
+
+```c
+char target[1000];
+sprintf(target, "makan_sehat%d.txt", counter++);
+FILE *ftarget = fopen(target, "w+");
+fclose(ftarget);
+```
+
 ## SOAL 5
 
 ### A
