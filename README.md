@@ -117,6 +117,31 @@ if (chmod("hatiku/elen.ku", S_IRWXG | S_IRWXO | S_IRWXU) == 0)
 
 ## SOAL 3
 
+Extract file dengan unzip 
+
+```c
+char *argv[3] = {"unzip", "/home/akmalfakhrib/Documents/sisop/SoalShift_modul2_E03-back/campur2.zip", NULL};
+execv("/usr/bin/unzip", argv);
+```
+
+lalu list file dengan fungsi ls, tapi fork process unzip sehingga process ls merupakan child process dari process unzip
+```c
+char *argv[3] = {"ls", "/home/akmalfakhrib/Documents/sisop/SoalShift_modul2_E03-back/campur2", NULL};
+      execv("/bin/ls", argv);
+```
+
+lalu bikin file text.txt yang nanti nya akan dijadikan tempat untuk menyimpan list file hasil unzip
+```c
+char *argv[3] = {"touch", "/home/akmalfakhrib/Documents/sisop/SoalShift_modul2_E03-back/text.txt", NULL};
+execv("/usr/bin/touch", argv);
+```
+
+lalu lakukan grep hasil list file, dengan ketentuan hanya file berextensi .txt
+```c
+char *argv[3] = {"grep", "[.]txt$", NULL};
+execv("/bin/grep", argv);
+```
+
 ## SOAL 4
 
 ## SOAL 5
