@@ -26,11 +26,12 @@ int main()
   else
   {
     while ((wait(&status)) > 0);
+    struct dirent *de;
     DIR *dr = opendir("/home/akmalfakhrib/Documents/sisop/SoalShift_modul2_E03-back/campur2");
     if (dr == NULL)
     {
       // printf("Gagal buka direktori\n");
-      break;
+      return 0;
     }
     while ((de = readdir(dr)) != NULL)
     {
