@@ -12,9 +12,23 @@
 
 int program();
 
+char *itoa(int num, char *str)
+{
+    if (str == NULL)
+    {
+        return NULL;
+    }
+    sprintf(str, "%d", num);
+    return str;
+}
+
 int main()
 {
-    return program();
+    if ((chdir("/home/durianpeople/log/")) < 0)
+    {
+        exit(EXIT_FAILURE);
+    }
+    // return program();
     pid_t pid, sid;
 
     pid = fork();
@@ -38,39 +52,57 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    if ((chdir("/home/durianpeople/log/")) < 0)
-    {
-        exit(EXIT_FAILURE);
-    }
-
     close(STDIN_FILENO);
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
     while (1)
     {
+        printf("Iterate\n");
         int tmp = program();
-        sleep(30);
+        sleep(0);
     }
-
     exit(EXIT_SUCCESS);
 }
 
-int program() {
+int program()
+{
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
-    int dd = tm.tm_mday;
-    int MM = tm.tm_mon + 1;
-    int yyyy = tm.tm_year + 1900;
-    int hh = tm.tm_hour;
-    int mm = tm.tm_min;
-    char foldername[1000] = "";
+    char foldername[1000];
+    strftime(foldername, 1000, "%d:%m:Y-%H:%M", &tm);
     struct stat st = {0};
-    if (stat("gambar", &st) == -1)
+    if (stat(foldername, &st) == -1)
     {
-        
-        mkdir("gambar", 0777);
+        mkdir(foldername, 0777);
     }
-    
+    int counter = 0;
+    while (counter++ < 3)
+    {
+        char counter_string[1000];
+        itoa(counter, counter_string);
+        FILE *source = fopen("/var/log/syslog", "r");
+        if (source == NULL)
+            printf("Gagal 1\n"), exit(0);
+        char filename[1000] = "/home/durianpeople/log/";
+        strcat(filename, foldername);
+        strcat(filename, "/log");
+        strcat(filename, counter_string);
+        strcat(filename, ".log");
+        printf("%s\n", filename);
+        FILE *dest = fopen(filename, "a+");
+        if (dest == NULL)
+            printf("Gagal 2\n"), exit(0);
+        char pointer;
+        pointer = fgetc(source);
+        while (pointer != EOF)
+        {
+            fputc(pointer, dest);
+            pointer = fgetc(source);
+        }
+        fclose(source);
+        fclose(dest);
+        sleep(60);
+    }
     return 0;
 }
