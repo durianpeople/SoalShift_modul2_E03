@@ -32,7 +32,7 @@ int main()
         exit(EXIT_FAILURE);
     }
 
-    if ((chdir("/home/durianpeople/Documents/Notes/SISOP/")) < 0)
+    if ((chdir("/home/durianpeople/modul2/")) < 0)
     {
         exit(EXIT_FAILURE);
     }
