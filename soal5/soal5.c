@@ -81,7 +81,7 @@ int program()
         mkdir(foldername, 0777);
     }
     int counter = 0;
-    while (counter++ < 3)
+    while (counter++ < 30)
     {
         char counter_string[1000];
         itoa(counter, counter_string);

@@ -87,8 +87,7 @@ int main()
             else
             {
                 // parent
-                while (wait(&status) > 0)
-                    ;
+                while (wait(&status) > 0);
                 continue;
             }
         }
