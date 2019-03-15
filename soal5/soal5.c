@@ -9,6 +9,7 @@
 #include <string.h>
 #include <sys/wait.h>
 #include <time.h>
+#include <signal.h>
 
 int program();
 
@@ -56,6 +57,9 @@ int main()
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
+    FILE *piddaemon = fopen("pid", "w+");
+    fprintf(piddaemon, "%d", getpid());
+    fclose(piddaemon);
     while (1)
     {
         printf("Iterate\n");
