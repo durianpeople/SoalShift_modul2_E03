@@ -14,7 +14,7 @@ int program();
 
 int main()
 {
-    return program();
+    // return program();
     pid_t pid, sid;
 
     pid = fork();
