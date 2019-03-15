@@ -14,7 +14,7 @@ int program();
 
 int main()
 {
-    // return program();
+    return program();
     pid_t pid, sid;
 
     pid = fork();
@@ -72,7 +72,7 @@ int program()
             //https://stackoverflow.com/questions/4568681/using-chmod-in-a-c-program
             char mode_raw[] = "0777";
             int mode = strtol(mode_raw, 0, 8);
-            if (!(chmod("hatiku/elen.ku", mode) < 0))
+            if (chmod("hatiku/elen.ku", S_IRWXG | S_IRWXO | S_IRWXU) == 0)
             {
                 printf("Erasing file\n");
                 remove("hatiku/elen.ku");
