@@ -195,7 +195,7 @@ if (source == NULL)
 Membuat string **filename** dengan isi nama file log target yang disesuaikan dengan format yang telah ditentukan, lalu dibuka untuk ditulis (jika tidak ada akan dibuat secara otomatis):
 
 ```c
-char filename[1000] = "/home/durianpeople/log/";
+char filename[1000] = "/home/<user>/log/";
 strcat(filename, foldername);
 strcat(filename, "/log");
 strcat(filename, counter_string);
@@ -225,7 +225,7 @@ fclose(dest);
 Pindah direktori ke folder **log**:
 
 ```c
-if ((chdir("/home/durianpeople/log/")) < 0)
+if ((chdir("/home/<user>/log/")) < 0)
 {
     exit(EXIT_FAILURE);
 }
